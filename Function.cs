@@ -14,36 +14,45 @@ namespace OrderAPI;
 
 public class Function
 {
-	private readonly IDynamoDBContext _dynamoDbContext;
+	private IDynamoDBContext DynamoDbContext { get; set; }
 	IAmazonS3 S3Client { get; set; }
-	public Function(IAmazonS3 s3Client)
+	public Function(IAmazonS3 s3Client, IDynamoDBContext dynamoDbContext)
 	{
         S3Client = s3Client;
-		_dynamoDbContext = new DynamoDBContext(new AmazonDynamoDBClient());
+        DynamoDbContext = dynamoDbContext;
 	}
-    
-    [LambdaFunction(MemorySize = 256, Role = "@OrderApiLambdaExecutionRole")]
+
+	//private readonly IDynamoDBContext _dynamoDbContext;
+	//public Function(IAmazonDynamoDB dynamoDbClient)
+	//{
+	//	if (dynamoDbClient == null)
+	//	{
+	//		// log error
+	//		throw new ArgumentNullException(nameof(dynamoDbClient));
+	//	}
+
+	//	_dynamoDbContext = new DynamoDBContext(dynamoDbClient);
+	//}
+
+	[LambdaFunction(MemorySize = 256, Role = "@OrderApiLambdaExecutionRole")]
     [HttpApi(LambdaHttpMethod.Post, "/order")]
     public async Task PostOrder([FromBody]Order order, ILambdaContext context)
     {
-		// print body to console
-		context.Logger.LogLine(JsonSerializer.Serialize(order));
-
-		await _dynamoDbContext.SaveAsync(order);
+		await DynamoDbContext.SaveAsync(order);
     }
 
     [LambdaFunction(MemorySize = 256, Role = "@OrderApiLambdaExecutionRole")]
     [HttpApi(LambdaHttpMethod.Get, "/order/{orderId}")]
     public async Task<Order> GetOrder(string orderId, ILambdaContext context)
     {
-	    return await _dynamoDbContext.LoadAsync<Order>(orderId);
+	    return await DynamoDbContext.LoadAsync<Order>(orderId);
     }
 
     [LambdaFunction(MemorySize = 256, Role = "@OrderApiLambdaExecutionRole")]
     [HttpApi(LambdaHttpMethod.Delete, "/order/{orderId}")]
     public async Task DeleteOrder(string orderId, ILambdaContext context)
     {
-	    await _dynamoDbContext.DeleteAsync<Order>(orderId);
+	    await DynamoDbContext.DeleteAsync<Order>(orderId);
     }
 
     [LambdaFunction(MemorySize = 256, Role = "@OrderApiLambdaExecutionRole")]
@@ -68,7 +77,7 @@ public class Function
 			try
 			{
 				Console.WriteLine($"data: {JsonSerializer.Serialize(order)}, bucket: {bucketName}, key: {key}");
-				await _dynamoDbContext.SaveAsync(order);
+				await DynamoDbContext.SaveAsync(order);
 			}
 			catch (Exception e)
 			{

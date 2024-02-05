@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderAPI", "OrderAPI.csproj", "{3E5BC5F8-4716-4F82-8FC9-E5B8B01459E9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceAuthorizer", "..\ServiceAuthorizer\ServiceAuthorizer.csproj", "{3A151CEE-0F9B-410F-91A3-FCEF28A53FF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3E5BC5F8-4716-4F82-8FC9-E5B8B01459E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E5BC5F8-4716-4F82-8FC9-E5B8B01459E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E5BC5F8-4716-4F82-8FC9-E5B8B01459E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A151CEE-0F9B-410F-91A3-FCEF28A53FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A151CEE-0F9B-410F-91A3-FCEF28A53FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A151CEE-0F9B-410F-91A3-FCEF28A53FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A151CEE-0F9B-410F-91A3-FCEF28A53FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,7 @@
-# AWS Lambda Empty Function Project
+# AWS Lambda Annotations Demo Project
 
-This starter project consists of:
-* Function.cs - class file containing a class with a single function handler method
-* aws-lambda-tools-defaults.json - default argument settings for use with Visual Studio and command line deployment tools for AWS
-
-You may also have a test project depending on the options selected.
-
-The generated function handler is a simple method accepting a string argument that returns the uppercase equivalent of the input string. Replace the body of this method, and parameters, to suit your needs. 
+This project demonstrates how to use the [Amazon.Lambda.Annotations] and then adopting it to AOT
+ 
 
 ## Here are some steps to follow from Visual Studio:
 
@@ -36,14 +31,8 @@ If already installed check if new version is available.
     dotnet tool update -g Amazon.Lambda.Tools
 ```
 
-Execute unit tests
-```
-    cd "OrderAPI/test/OrderAPI.Tests"
-    dotnet test
-```
-
 Deploy function to AWS Lambda
 ```
     cd "OrderAPI/src/OrderAPI"
-    dotnet lambda deploy-function
+    dotnet lambda deploy-serverless
 ```
